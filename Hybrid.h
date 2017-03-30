@@ -5,6 +5,8 @@
 using CSC2110::QueueLinked;
 #include "ListDoublyLinkedIterator.h"
 #include "SortedListDoublyLinked.h"
+#include <iostream>
+using namespace std;
 
 template < class T >
 class Hybrid
@@ -63,10 +65,17 @@ void Hybrid<T>::enqueue(T* item)
 template < class T >
 T* Hybrid<T>::dequeue()
 {
+	
 	//As also stated in the lab when we dequeue the item from the queue it's returned to us, this allows us to
 	//remove it from the sortedDoublyLinked.
 	DoubleNode<T>* item = q->dequeue();
+	if (q->dequeue() == NULL)
+	{
+		return NULL;
+	}
+	T* itemRemove = item->getItem();
 	sldl->remove(item);
+	return itemRemove;
 }
 template < class T >
 
